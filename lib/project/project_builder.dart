@@ -1,19 +1,21 @@
 import 'package:astro_app/project/configuration/configuration_steps.dart';
 import 'package:astro_app/project/project.dart';
 import 'package:astro_app/project/sub_classes/camera.dart';
+import 'package:astro_app/project/sub_classes/filter.dart';
 import 'package:astro_app/project/sub_classes/telescope.dart';
 
 class ProjectBuilder {
   String? name;
   Camera? camera;
   Telescope? telescope;
-
+  Filter? filter;
   // chain of responsibility
   // steps in here need to be in order of the configuration steps
   List<ConfigurationStep> get _steps => [
         NameStep(),
         CameraStep(),
         TelescopeStep(),
+        FilterStep(),
       ];
 
   /// Returns the previous configuration step.
@@ -53,13 +55,19 @@ class ProjectBuilder {
     return this;
   }
 
+  ProjectBuilder setFilter(Filter filter) {
+    filter = filter;
+    return this;
+  }
+
   bool get isFullyConfigured =>
-      name != null && camera != null && telescope != null;
+      name != null && camera != null && telescope != null && filter != null;
 
   Project build() {
     if (!isFullyConfigured) {
       throw Exception('Project is not fully configured.');
     }
-    return Project(name: name!, camera: camera!, telescope: telescope!);
+    return Project(
+        name: name!, camera: camera!, telescope: telescope!, filter: filter!);
   }
 }

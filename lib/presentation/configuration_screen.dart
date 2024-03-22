@@ -1,5 +1,6 @@
 import 'package:astro_app/main.dart';
 import 'package:astro_app/presentation/steps/camera_step_widget.dart';
+import 'package:astro_app/presentation/steps/filter_step_widget.dart';
 import 'package:astro_app/presentation/steps/name_step_widget.dart';
 import 'package:astro_app/presentation/steps/telescope_step_widget.dart';
 import 'package:astro_app/project/configuration/configuration_steps.dart';
@@ -44,6 +45,11 @@ class ConfigurationScreen extends StatelessWidget {
         return CameraStepWidget(
           availableCameras:
               (step as CameraStep).getAvailableCameras(projectBuilder),
+        );
+      case const (FilterStep):
+        return FilterStepWidget(
+          availableFilters:
+              (step as FilterStep).getAvailableFilters(projectBuilder),
         );
       case const (TelescopeStep):
       default:

@@ -1,5 +1,6 @@
 import 'package:astro_app/project/project_builder.dart';
 import 'package:astro_app/project/sub_classes/camera.dart';
+import 'package:astro_app/project/sub_classes/filter.dart';
 import 'package:astro_app/project/sub_classes/telescope.dart';
 
 abstract class ConfigurationStep {
@@ -51,5 +52,25 @@ class TelescopeStep implements ConfigurationStep {
     } else {
       return [Telescope.refractor];
     }
+  }
+}
+
+class FilterStep implements ConfigurationStep {
+  @override
+  bool isCurrentStep(ProjectBuilder projectBuilder) {
+    if (projectBuilder.filter == null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  List<Filter> getAvailableFilters(ProjectBuilder projectBuilder) {
+    // decide which telescopes are available based on the previous selections
+    // final selectedFilter = projectBuilder.filter!;
+    return [
+      const Filter(name: "Filter 1", type: FilterTypes.ir),
+      const Filter(name: "Filter 2", type: FilterTypes.lrgb),
+    ];
   }
 }

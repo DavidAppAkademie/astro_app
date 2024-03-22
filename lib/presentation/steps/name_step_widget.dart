@@ -1,3 +1,4 @@
+import 'package:astro_app/common/beautiful_text_field.dart';
 import 'package:astro_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,11 +27,9 @@ class NameStepWidgetState extends State<NameStepWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
+        BeautifulTextField(
           controller: _controller,
-          decoration: const InputDecoration(
-            labelText: "Name",
-          ),
+          labelText: 'asdasd',
         ),
         const SizedBox(
           height: 16,

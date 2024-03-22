@@ -3,6 +3,7 @@ import 'package:astro_app/project/configuration/configuration_steps.dart';
 import 'package:astro_app/project/project.dart';
 import 'package:astro_app/project/project_builder.dart';
 import 'package:astro_app/project/sub_classes/camera.dart';
+import 'package:astro_app/project/sub_classes/filter.dart';
 import 'package:astro_app/project/sub_classes/telescope.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +40,11 @@ class ProjectBuilderNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setFilter(Filter filter) {
+    _projectBuilder.filter = filter;
+    notifyListeners();
+  }
+
   void stepBack() {
     final prevStep = _projectBuilder.previousStep;
     if (prevStep != null) {
@@ -49,6 +55,8 @@ class ProjectBuilderNotifier extends ChangeNotifier {
           _projectBuilder.camera = null;
         case const (TelescopeStep):
           _projectBuilder.telescope = null;
+        case const (FilterStep):
+          _projectBuilder.filter = null;
       }
       notifyListeners();
     }
